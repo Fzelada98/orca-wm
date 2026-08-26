@@ -249,6 +249,21 @@
   .years{display:flex;gap:clamp(24px,4vw,64px);margin-top:clamp(40px,6vh,60px);padding-top:34px;border-top:1px solid var(--hairline-d);flex-wrap:wrap}
   .yr .yy{font-size:12px;letter-spacing:.22em;color:var(--mist);text-transform:uppercase}
   .yr .yv{font-family:var(--serif);font-size:clamp(26px,2.6vw,34px);color:var(--ivory);margin-top:8px;font-variant-numeric:tabular-nums}
+  .chart-wrap{position:relative;margin-top:clamp(44px,6vh,64px)}
+  .chart-head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:18px;flex-wrap:wrap}
+  .chart-title{font-size:11.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--mist)}
+  .chart-note{font-size:12px;color:var(--mist)}
+  #trackchart{display:block;width:100%;height:auto;touch-action:pan-y}
+  #trackchart text{font-family:var(--sans);fill:var(--mist);font-size:12px}
+  #trackchart .grid{stroke:rgba(242,238,229,.08);stroke-width:1}
+  #trackchart .serie{fill:none;stroke:var(--gold-soft);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+  #trackchart .area{fill:url(#goldfill)}
+  #trackchart .xh{stroke:rgba(242,238,229,.22);stroke-width:1;stroke-dasharray:3 4}
+  .chart-tip{position:absolute;pointer-events:none;opacity:0;transition:opacity .18s ease;
+    background:rgba(7,12,20,.94);border:1px solid rgba(194,162,101,.35);padding:10px 14px;min-width:130px;
+    transform:translate(-50%,-115%);z-index:3}
+  .chart-tip .td{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mist)}
+  .chart-tip .tv{font-family:var(--serif);font-size:22px;color:var(--gold-soft);font-variant-numeric:tabular-nums;margin-top:2px}
   .resultados .fine{margin-top:38px;font-size:12px;color:var(--mist);max-width:88ch;line-height:1.6}
   @media (max-width:860px){.kpi-grid{grid-template-columns:1fr 1fr}}
   /* ---------- Fundador ---------- */
@@ -426,6 +441,14 @@
         <div class="kpi reveal"><div class="kv" data-kpi="15.9" data-dec="1" data-pre="+" data-suf="%">+15.9%</div><div class="kl">Anualizada en USD</div></div>
         <div class="kpi reveal"><div class="kv" data-kpi="100" data-dec="0" data-pre="" data-suf="%">100%</div><div class="kl">Años en positivo</div></div>
         <div class="kpi reveal"><div class="kv" data-kpi="5.4" data-dec="1" data-pre="−" data-suf="%">−5.4%</div><div class="kl">Caída máxima<br>en tres años</div></div>
+      </div>
+      <div class="chart-wrap reveal">
+        <div class="chart-head">
+          <span class="chart-title">Evolución del portafolio · base 100 · USD</span>
+          <span class="chart-note">Pase el cursor para ver cada fecha</span>
+        </div>
+        <svg id="trackchart" viewBox="0 0 1000 380" role="img" aria-label="Evolución del portafolio: de 0% en octubre de 2022 a +61% en enero de 2026"></svg>
+        <div class="chart-tip" id="charttip"><div class="td"></div><div class="tv"></div></div>
       </div>
       <div class="years reveal">
         <div class="yr"><div class="yy">2023</div><div class="yv">+10.9%</div></div>
@@ -699,6 +722,88 @@
       if(document.hidden) cancelAnimationFrame(raf); else raf=requestAnimationFrame(draw);
     });
   }
+
+  // ---- Gráfico interactivo del track record ----
+  (function(){
+    const DATA=[["20 oct 2022",0.0],["27 oct 2022",0.07],["3 nov 2022",0.18],["10 nov 2022",0.13],["17 nov 2022",0.29],["24 nov 2022",0.39],["1 dic 2022",0.54],["8 dic 2022",0.65],["15 dic 2022",0.75],["22 dic 2022",0.85],["29 dic 2022",0.96],["5 ene 2023",1.11],["12 ene 2023",1.19],["19 ene 2023",1.29],["26 ene 2023",1.4],["2 feb 2023",1.48],["9 feb 2023",1.58],["16 feb 2023",0.61],["23 feb 2023",0.2],["2 mar 2023",-0.78],["9 mar 2023",-0.43],["16 mar 2023",-2.2],["23 mar 2023",-3.1],["30 mar 2023",-2.46],["6 abr 2023",0.03],["13 abr 2023",0.28],["20 abr 2023",0.05],["27 abr 2023",-1.27],["4 may 2023",-0.9],["11 may 2023",0.78],["18 may 2023",-0.12],["25 may 2023",-0.53],["1 jun 2023",-0.19],["8 jun 2023",1.39],["15 jun 2023",2.53],["22 jun 2023",3.44],["29 jun 2023",4.19],["6 jul 2023",3.64],["13 jul 2023",5.31],["20 jul 2023",6.25],["27 jul 2023",6.8],["3 ago 2023",6.82],["10 ago 2023",6.93],["17 ago 2023",5.7],["24 ago 2023",6.29],["31 ago 2023",6.24],["7 sep 2023",6.07],["14 sep 2023",7.04],["21 sep 2023",6.78],["28 sep 2023",6.01],["5 oct 2023",3.24],["12 oct 2023",4.0],["19 oct 2023",2.77],["26 oct 2023",2.06],["2 nov 2023",2.68],["9 nov 2023",3.29],["16 nov 2023",4.45],["23 nov 2023",5.0],["30 nov 2023",6.09],["7 dic 2023",6.79],["14 dic 2023",8.63],["21 dic 2023",10.48],["28 dic 2023",10.89],["4 ene 2024",11.14],["11 ene 2024",11.93],["18 ene 2024",11.96],["25 ene 2024",11.95],["1 feb 2024",13.15],["8 feb 2024",12.66],["15 feb 2024",15.09],["22 feb 2024",17.95],["29 feb 2024",17.56],["7 mar 2024",17.77],["14 mar 2024",17.95],["21 mar 2024",18.62],["28 mar 2024",18.85],["4 abr 2024",18.43],["11 abr 2024",18.29],["18 abr 2024",18.14],["25 abr 2024",18.34],["2 may 2024",18.63],["9 may 2024",20.0],["16 may 2024",20.67],["23 may 2024",19.92],["30 may 2024",19.95],["6 jun 2024",22.02],["13 jun 2024",22.28],["20 jun 2024",22.22],["27 jun 2024",22.97],["4 jul 2024",23.43],["11 jul 2024",24.31],["18 jul 2024",24.29],["25 jul 2024",24.37],["1 ago 2024",25.41],["8 ago 2024",25.74],["15 ago 2024",26.7],["22 ago 2024",27.36],["29 ago 2024",27.63],["5 sep 2024",27.53],["12 sep 2024",27.8],["19 sep 2024",28.54],["26 sep 2024",28.7],["3 oct 2024",29.22],["10 oct 2024",29.32],["17 oct 2024",29.94],["24 oct 2024",29.4],["31 oct 2024",28.98],["7 nov 2024",29.55],["14 nov 2024",29.45],["21 nov 2024",29.56],["28 nov 2024",28.72],["5 dic 2024",30.28],["12 dic 2024",31.46],["19 dic 2024",31.63],["26 dic 2024",30.5],["2 ene 2025",31.4],["9 ene 2025",31.37],["16 ene 2025",31.69],["23 ene 2025",31.38],["30 ene 2025",33.78],["6 feb 2025",34.87],["13 feb 2025",34.63],["20 feb 2025",35.68],["27 feb 2025",36.59],["6 mar 2025",35.81],["13 mar 2025",34.65],["20 mar 2025",34.76],["27 mar 2025",35.86],["3 abr 2025",37.45],["10 abr 2025",33.58],["17 abr 2025",32.02],["24 abr 2025",31.72],["1 may 2025",34.37],["8 may 2025",33.75],["15 may 2025",34.84],["22 may 2025",35.96],["29 may 2025",35.38],["5 jun 2025",35.84],["12 jun 2025",36.86],["19 jun 2025",37.11],["26 jun 2025",37.61],["3 jul 2025",39.26],["10 jul 2025",40.75],["17 jul 2025",40.19],["24 jul 2025",40.65],["31 jul 2025",40.79],["7 ago 2025",40.03],["14 ago 2025",42.48],["21 ago 2025",43.91],["28 ago 2025",43.99],["4 sep 2025",44.81],["11 sep 2025",46.28],["18 sep 2025",46.22],["25 sep 2025",46.27],["2 oct 2025",45.73],["9 oct 2025",45.79],["16 oct 2025",45.17],["23 oct 2025",48.39],["30 oct 2025",47.06],["6 nov 2025",47.98],["13 nov 2025",50.32],["20 nov 2025",51.12],["27 nov 2025",49.73],["4 dic 2025",51.52],["11 dic 2025",52.61],["18 dic 2025",52.99],["25 dic 2025",53.34],["1 ene 2026",55.07],["8 ene 2026",55.34],["10 ene 2026",61.04]];
+    const YEARS={"2024": 63, "2025": 115, "2026": 167};
+    const svg=document.getElementById('trackchart'), tip=document.getElementById('charttip');
+    if(!svg) return;
+    const NS='http://www.w3.org/2000/svg';
+    const W=1000,H=380,L=58,R=26,T=18,B=42;
+    const iw=W-L-R, ih=H-T-B;
+    const ymax=65;
+    const X=i=>L+iw*i/(DATA.length-1);
+    const Y=v=>T+ih*(1-v/ymax);
+    const el=(n,a)=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e};
+
+    const defs=el('defs',{});
+    defs.innerHTML='<linearGradient id="goldfill" x1="0" y1="0" x2="0" y2="1">'
+      +'<stop offset="0" stop-color="rgba(194,162,101,0.28)"/>'
+      +'<stop offset="1" stop-color="rgba(194,162,101,0)"/></linearGradient>';
+    svg.appendChild(defs);
+
+    // grid + etiquetas Y
+    [0,20,40,60].forEach(v=>{
+      svg.appendChild(el('line',{class:'grid',x1:L,x2:W-R,y1:Y(v),y2:Y(v)}));
+      const t=el('text',{x:L-10,y:Y(v)+4,'text-anchor':'end'}); t.textContent=(v>0?'+':'')+v+'%'; svg.appendChild(t);
+    });
+    // etiquetas X (años)
+    for(const y in YEARS){
+      const t=el('text',{x:X(YEARS[y]),y:H-14,'text-anchor':'middle'}); t.textContent=y; svg.appendChild(t);
+    }
+    const t0=el('text',{x:L,y:H-14,'text-anchor':'start'}); t0.textContent='oct 2022'; svg.appendChild(t0);
+
+    // área + línea
+    let dLine='';
+    DATA.forEach((p,i)=>{dLine+=(i?'L':'M')+X(i).toFixed(1)+' '+Y(p[1]).toFixed(1)+' ';});
+    const dArea=dLine+'L'+(W-R)+' '+Y(0)+' L'+L+' '+Y(0)+' Z';
+    svg.appendChild(el('path',{class:'area',d:dArea}));
+    const line=el('path',{class:'serie',d:dLine}); svg.appendChild(line);
+
+    // punto final + etiqueta directa
+    const li=DATA.length-1;
+    svg.appendChild(el('circle',{cx:X(li),cy:Y(DATA[li][1]),r:4.5,fill:'#D8BE8A'}));
+    svg.appendChild(el('circle',{cx:X(li),cy:Y(DATA[li][1]),r:9,fill:'none',stroke:'rgba(216,190,138,.4)','stroke-width':1}));
+    const lend=el('text',{x:X(li)-12,y:Y(DATA[li][1])-16,'text-anchor':'end',style:'font-family:Baskerville,Georgia,serif;font-size:20px;fill:#D8BE8A'});
+    lend.textContent='+'+DATA[li][1].toFixed(0)+'%'; svg.appendChild(lend);
+
+    // dibujo animado al entrar en pantalla
+    const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(!reduced){
+      const len=line.getTotalLength();
+      line.style.strokeDasharray=len; line.style.strokeDashoffset=len;
+      const area=svg.querySelector('.area'); area.style.opacity=0;
+      new IntersectionObserver((es,o)=>{es.forEach(e=>{if(e.isIntersecting){
+        line.style.transition='stroke-dashoffset 2.2s cubic-bezier(.3,.6,.2,1)';
+        line.style.strokeDashoffset=0;
+        area.style.transition='opacity 1.2s ease 1.2s'; area.style.opacity=1;
+        o.unobserve(e.target);
+      }})},{threshold:.4}).observe(svg);
+    }
+
+    // crosshair + tooltip
+    const xh=el('line',{class:'xh',y1:T,y2:T+ih,x1:-99,x2:-99}); svg.appendChild(xh);
+    const dot=el('circle',{r:5,fill:'#D8BE8A',opacity:0}); svg.appendChild(dot);
+    const move=(clientX)=>{
+      const r=svg.getBoundingClientRect();
+      const px=(clientX-r.left)/r.width*W;
+      let i=Math.round((px-L)/iw*(DATA.length-1));
+      i=Math.max(0,Math.min(DATA.length-1,i));
+      const x=X(i),y=Y(DATA[i][1]);
+      xh.setAttribute('x1',x); xh.setAttribute('x2',x);
+      dot.setAttribute('cx',x); dot.setAttribute('cy',y); dot.setAttribute('opacity',1);
+      tip.style.opacity=1;
+      tip.style.left=(x/W*100)+'%';
+      tip.style.top=(y/H*100)+'%';
+      tip.querySelector('.td').textContent=DATA[i][0];
+      tip.querySelector('.tv').textContent=(DATA[i][1]>=0?'+':'')+DATA[i][1].toFixed(1)+'%';
+    };
+    svg.addEventListener('mousemove',e=>move(e.clientX));
+    svg.addEventListener('touchstart',e=>move(e.touches[0].clientX),{passive:true});
+    svg.addEventListener('touchmove',e=>move(e.touches[0].clientX),{passive:true});
+    svg.addEventListener('mouseleave',()=>{tip.style.opacity=0;dot.setAttribute('opacity',0);xh.setAttribute('x1',-99);xh.setAttribute('x2',-99);});
+  })();
 </script>
 </body>
 </html>
