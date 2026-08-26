@@ -1,0 +1,579 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Orca Wealth Management</title>
+<meta name="description" content="Boutique independiente de gestión patrimonial en Lima. Una visión integral de su horizonte patrimonial: inversiones, planificación sucesoria y protección para familias e inversionistas privados.">
+<style>
+  :root{
+    --abyss:#05090F;
+    --deep:#0A1220;
+    --deep-2:#0E1930;
+    --ivory:#F2EEE5;
+    --ivory-dim:#B9BDC4;
+    --mist:#7C8694;
+    --gold:#C2A265;
+    --gold-soft:#D8BE8A;
+    --paper:#F3F0E8;
+    --paper-deep:#EAE6DA;
+    --ink:#10151D;
+    --slate:#5A6470;
+    --hairline-d:rgba(242,238,229,.12);
+    --hairline-l:#D9D3C4;
+    --serif:"Baskerville","Palatino Linotype","Palatino",Georgia,"Times New Roman",serif;
+    --sans:"Avenir Next","Avenir","Helvetica Neue",Helvetica,"Segoe UI",Arial,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation:none!important;transition:none!important}
+    .fade-in{opacity:1!important}
+    .h-line span{transform:none!important}
+    .reveal{opacity:1!important;transform:none!important}
+  }
+  html,body{overflow-x:hidden}
+  body{
+    background:var(--abyss);
+    color:var(--ivory);
+    font-family:var(--sans);
+    font-size:17px;line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap>*{max-width:100%}
+  a{color:inherit;text-decoration:none}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 clamp(22px,4.5vw,56px)}
+  .eyebrow{
+    font-size:11.5px;letter-spacing:.3em;text-transform:uppercase;
+    color:var(--gold);font-weight:600;
+  }
+  .eyebrow::before{content:"";display:inline-block;width:34px;height:1px;background:var(--gold);vertical-align:middle;margin-right:14px;opacity:.7}
+
+  /* ---------- Nav ---------- */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    transition:background .4s,border-color .4s,padding .4s;
+    border-bottom:1px solid transparent;
+  }
+  header.scrolled{
+    background:rgba(5,9,15,.86);
+    backdrop-filter:blur(12px);
+    border-bottom-color:var(--hairline-d);
+  }
+  .nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:20px clamp(22px,4.5vw,56px);
+    max-width:1400px;margin:0 auto;
+    transition:padding .4s;
+  }
+  header.scrolled .nav{padding-top:12px;padding-bottom:12px}
+  .brand{display:flex;align-items:center;gap:14px}
+  .brand img{width:54px;height:36px;border-radius:6px;display:block;object-fit:cover}
+  .brand .bn{font-family:var(--serif);font-size:23px;letter-spacing:.04em;color:var(--ivory)}
+  .brand .bs{display:block;font-family:var(--sans);font-size:9.5px;letter-spacing:.34em;text-transform:uppercase;color:var(--mist);margin-top:1px}
+  nav.links{display:flex;gap:36px;align-items:center}
+  nav.links a{font-size:13px;letter-spacing:.08em;color:var(--ivory-dim);transition:color .25s;text-transform:uppercase;font-weight:500}
+  nav.links a:hover{color:var(--gold-soft)}
+  .btn{
+    display:inline-block;font-size:12.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+    padding:13px 28px;border:1px solid var(--gold);color:var(--gold-soft);
+    background:transparent;cursor:pointer;
+    transition:background .3s,color .3s;
+  }
+  .btn:hover{background:var(--gold);color:var(--abyss)}
+  .btn.solid{background:var(--gold);color:var(--abyss)}
+  .btn.solid:hover{background:var(--gold-soft)}
+  @media (max-width:900px){nav.links a:not(.btn){display:none}}
+  @media (max-width:640px){
+    .nav{padding:14px 20px}
+    .brand .bn{font-size:20px}
+    .btn{padding:11px 18px;letter-spacing:.08em}
+    .eyebrow{font-size:10px;letter-spacing:.16em}
+    .eyebrow::before{width:18px;margin-right:9px}
+    .hero-inner{padding:120px 0 140px}
+    .hero .lede{font-size:16.5px}
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    position:relative;min-height:100vh;min-height:100svh;
+    display:flex;align-items:center;
+    overflow:hidden;
+    background:
+      radial-gradient(120% 90% at 78% 8%,#16233C 0%,transparent 55%),
+      radial-gradient(90% 70% at 15% 95%,#0C1626 0%,transparent 60%),
+      linear-gradient(180deg,#070D16 0%,var(--abyss) 100%);
+  }
+  #sea{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:.55}
+  .hero .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(5,9,15,.25) 0%,rgba(5,9,15,0) 40%,rgba(5,9,15,.72) 100%)}
+  .hero-inner{position:relative;z-index:2;padding:170px 0 180px;width:100%}
+  .hero h1{
+    font-family:var(--serif);font-weight:400;
+    font-size:clamp(36px,6.4vw,90px);
+    line-height:1.12;letter-spacing:.002em;
+    text-wrap:balance;max-width:16ch;
+    margin:34px 0 36px;
+  }
+  .hero h1 em{font-style:italic;color:var(--gold-soft)}
+  .hero .lede{
+    max-width:54ch;font-size:18px;color:var(--ivory-dim);
+    font-weight:400;margin-bottom:52px;line-height:1.8;
+  }
+  .hero .cta-row{display:flex;gap:18px;flex-wrap:wrap;align-items:center}
+  .hero .note{font-size:12.5px;color:var(--mist);letter-spacing:.06em}
+  .h-line{display:block;overflow:hidden;padding-bottom:.14em;margin-bottom:-.14em}
+  .h-line span{display:block;transform:translateY(110%);animation:riseUp 1s cubic-bezier(.2,.65,.2,1) forwards}
+  .h-line:nth-child(2) span{animation-delay:.12s}
+  .h-line:nth-child(3) span{animation-delay:.24s}
+  @keyframes riseUp{to{transform:translateY(0)}}
+  .fade-in{opacity:0;animation:fadeIn 1.1s ease forwards}
+  .fade-in.d1{animation-delay:.5s}
+  .fade-in.d2{animation-delay:.75s}
+  .fade-in.d3{animation-delay:1s}
+  @keyframes fadeIn{to{opacity:1}}
+  .scroll-cue{
+    position:absolute;bottom:34px;left:50%;transform:translateX(-50%);z-index:2;
+    display:flex;flex-direction:column;align-items:center;gap:10px;
+    color:var(--mist);font-size:10px;letter-spacing:.3em;text-transform:uppercase;
+  }
+  .scroll-cue::after{
+    content:"";width:1px;height:44px;background:linear-gradient(var(--gold),transparent);
+    animation:drip 2.4s ease-in-out infinite;
+  }
+  @keyframes drip{0%{transform:scaleY(0);transform-origin:top}55%{transform:scaleY(1);transform-origin:top}56%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+  @media (max-height:780px){.scroll-cue{display:none}}
+
+  /* ---------- Stats ---------- */
+  .stats{border-top:1px solid var(--hairline-d);border-bottom:1px solid var(--hairline-d);background:var(--deep)}
+  .stats .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
+  .stats .cell{padding:44px 30px;border-left:1px solid var(--hairline-d)}
+  .stats .cell:first-child{border-left:none;padding-left:0}
+  .stats .k{
+    font-family:var(--serif);font-size:clamp(30px,3vw,42px);color:var(--gold-soft);
+    font-variant-numeric:tabular-nums;line-height:1;
+  }
+  .stats .v{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--mist);margin-top:14px;line-height:1.6}
+  @media (max-width:860px){
+    .stats .wrap{grid-template-columns:1fr 1fr}
+    .stats .cell{padding:26px 20px}
+    .stats .cell:nth-child(odd){border-left:none;padding-left:0}
+  }
+
+  /* ---------- Shared section bones ---------- */
+  section{padding:clamp(88px,12vh,150px) 0;position:relative}
+  .sec-head{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:clamp(26px,5vw,90px);margin-bottom:clamp(48px,7vh,80px);align-items:end}
+  .sec-head h2{
+    font-family:var(--serif);font-weight:400;
+    font-size:clamp(34px,4.2vw,56px);line-height:1.1;text-wrap:balance;margin-top:18px;
+  }
+  .sec-head .desc{max-width:56ch;font-size:16.5px;padding-bottom:10px}
+  @media (max-width:860px){.sec-head{grid-template-columns:1fr;gap:18px}}
+
+  /* ---------- Filosofía (interludio marfil) ---------- */
+  .filosofia{background:var(--paper);color:var(--ink)}
+  .filosofia .eyebrow{color:#9A7B3F}
+  .filosofia .eyebrow::before{background:#9A7B3F}
+  .filosofia .grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:clamp(36px,6vw,100px);align-items:start}
+  .filosofia blockquote{
+    position:relative;
+    font-family:var(--serif);font-size:clamp(27px,3.3vw,40px);
+    line-height:1.4;font-weight:400;max-width:26ch;text-wrap:balance;
+    padding-top:92px;
+  }
+  .filosofia blockquote::before{
+    content:"\201C";position:absolute;top:-8px;left:-6px;
+    font-family:var(--serif);font-size:110px;line-height:1;color:#C2A265;opacity:.28;
+    pointer-events:none;
+  }
+  .filosofia blockquote em{font-style:italic;color:#9A7B3F}
+  .filosofia .pts{border-top:1px solid var(--hairline-l)}
+  .filosofia .pt{padding:26px 0;border-bottom:1px solid var(--hairline-l)}
+  .filosofia .pt h3{font-size:15px;font-weight:600;letter-spacing:.04em;margin-bottom:8px;color:var(--ink)}
+  .filosofia .pt p{font-size:15px;color:var(--slate)}
+  .filosofia .pt .idx{font-family:var(--serif);color:#9A7B3F;font-size:14px;margin-right:12px}
+  @media (max-width:860px){.filosofia .grid{grid-template-columns:1fr}}
+
+  /* ---------- Servicios (profundo) ---------- */
+  .servicios{background:linear-gradient(180deg,var(--abyss),var(--deep-2) 130%)}
+  .servicios .desc{color:var(--ivory-dim)}
+  .srv-grid{
+    display:grid;grid-template-columns:1fr 1fr 1fr;
+    border-top:1px solid var(--hairline-d);border-left:1px solid var(--hairline-d);
+  }
+  .srv{
+    position:relative;
+    border-right:1px solid var(--hairline-d);border-bottom:1px solid var(--hairline-d);
+    padding:40px 32px 48px;min-height:250px;
+    display:flex;flex-direction:column;gap:14px;
+    transition:background .35s;
+    overflow:hidden;
+  }
+  .srv::after{
+    content:"";position:absolute;left:0;right:0;bottom:0;height:2px;
+    background:linear-gradient(90deg,var(--gold),transparent);
+    transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.2,.65,.2,1);
+  }
+  .srv:hover{background:rgba(242,238,229,.035)}
+  .srv:hover::after{transform:scaleX(1)}
+  .srv .num{font-family:var(--serif);font-size:15px;color:var(--gold);letter-spacing:.1em}
+  .srv h3{font-family:var(--serif);font-size:23px;font-weight:400;line-height:1.25;text-wrap:balance;color:var(--ivory)}
+  .srv p{font-size:14.5px;color:var(--ivory-dim);line-height:1.65}
+  @media (max-width:960px){.srv-grid{grid-template-columns:1fr 1fr}}
+  @media (max-width:620px){.srv-grid{grid-template-columns:1fr}.srv{min-height:0}}
+
+  /* ---------- Proceso (marfil) ---------- */
+  .proceso{background:var(--paper-deep);color:var(--ink)}
+  .proceso .eyebrow{color:#9A7B3F}
+  .proceso .eyebrow::before{background:#9A7B3F}
+  .proceso .desc{color:var(--slate)}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(22px,3vw,44px);position:relative}
+  .steps::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:var(--hairline-l)}
+  .step{padding-top:30px;position:relative}
+  .step::before{content:"";position:absolute;top:-3px;left:0;width:7px;height:7px;border-radius:50%;background:#9A7B3F}
+  .step .n{font-family:var(--serif);font-size:clamp(46px,5vw,64px);color:#C2A265;line-height:1}
+  .step h3{font-size:15.5px;font-weight:600;letter-spacing:.04em;margin:16px 0 8px;color:var(--ink)}
+  .step p{font-size:14.5px;color:var(--slate)}
+  @media (max-width:860px){.steps{grid-template-columns:1fr 1fr}.steps::before{display:none}}
+  @media (max-width:540px){.steps{grid-template-columns:1fr}}
+
+  /* ---------- Fundador ---------- */
+  .fundador{background:var(--abyss)}
+  .fundador .grid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:clamp(40px,6vw,100px);align-items:center}
+  .portrait-frame{position:relative;width:100%;max-width:380px;margin:0 auto;justify-self:center}
+  .portrait{
+    position:relative;aspect-ratio:4/5;overflow:hidden;
+    background:
+      radial-gradient(90% 70% at 70% 20%,rgba(194,162,101,.16),transparent 60%),
+      linear-gradient(160deg,#101A2C,#060B13);
+    display:flex;align-items:center;justify-content:center;
+  }
+  .portrait::after{content:"";position:absolute;inset:0;border:1px solid var(--hairline-d)}
+  .portrait-frame::before{
+    content:"";position:absolute;top:18px;left:18px;right:-18px;bottom:-18px;
+    border:1px solid rgba(194,162,101,.35);z-index:-1;
+  }
+  .portrait .ph{
+    width:62%;aspect-ratio:1;border-radius:50%;overflow:hidden;
+    border:1px solid rgba(194,162,101,.5);
+    box-shadow:0 30px 60px rgba(0,0,0,.55);
+    display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(80% 80% at 50% 30%,#152238,#080E18);
+  }
+  .portrait .ph .mono{
+    font-family:var(--serif);font-size:clamp(56px,6vw,84px);
+    color:var(--gold-soft);letter-spacing:.08em;line-height:1;
+    transform:translateY(-2px);
+  }
+  .portrait .sig{
+    position:absolute;bottom:22px;left:0;right:0;text-align:center;
+    font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--mist);
+  }
+  .fundador h2{font-family:var(--serif);font-weight:400;font-size:clamp(34px,4vw,52px);margin:16px 0 8px}
+  .fundador .role{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:26px}
+  .fundador p{color:var(--ivory-dim);max-width:58ch;margin-bottom:18px}
+  .fundador .li{
+    display:inline-flex;align-items:center;gap:10px;margin-top:12px;
+    font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--gold-soft);border-bottom:1px solid var(--gold);padding-bottom:4px;
+  }
+  @media (max-width:860px){.fundador .grid{grid-template-columns:1fr}.portrait-frame{max-width:300px}}
+
+  /* ---------- Cierre ---------- */
+  .cierre{
+    background:
+      radial-gradient(100% 120% at 50% 120%,#14213A 0%,transparent 60%),
+      var(--deep);
+    border-top:1px solid var(--hairline-d);
+    text-align:center;
+  }
+  .cierre h2{
+    font-family:var(--serif);font-weight:400;
+    font-size:clamp(34px,4.8vw,62px);line-height:1.1;text-wrap:balance;
+    max-width:21ch;margin:20px auto;
+  }
+  .cierre h2 em{font-style:italic;color:var(--gold-soft)}
+  .cierre p{color:var(--ivory-dim);max-width:47ch;margin:0 auto 42px}
+  .cierre .cta-row{display:flex;gap:18px;justify-content:center;flex-wrap:wrap}
+  .wa{
+    display:inline-flex;align-items:center;gap:11px;
+    background:var(--gold);color:var(--abyss);
+    padding:16px 34px;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+    transition:background .3s,transform .3s;
+  }
+  .wa:hover{background:var(--gold-soft);transform:translateY(-2px)}
+  .wa svg{width:18px;height:18px;fill:currentColor}
+
+  footer{border-top:1px solid var(--hairline-d);padding:46px 0 54px;color:var(--mist);font-size:12.5px;background:var(--abyss)}
+  footer .row{display:flex;justify-content:space-between;align-items:center;gap:24px;flex-wrap:wrap;margin-bottom:20px}
+  footer .fb{display:flex;align-items:center;gap:12px}
+  footer .fb img{width:34px;height:34px;border-radius:6px}
+  footer .fm{font-family:var(--serif);font-size:17px;color:var(--ivory);letter-spacing:.05em}
+  footer .disclaimer{max-width:92ch;line-height:1.6;opacity:.8}
+
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.65,.2,1)}
+  .reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<header id="hdr">
+  <div class="nav">
+    <a class="brand" href="#top" aria-label="Orca Wealth Management">
+      <img src="data:image/jpeg;base64,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" alt="">
+      <span><span class="bn">Orca</span><span class="bs">Wealth Management</span></span>
+    </a>
+    <nav class="links" aria-label="Principal">
+      <a href="#filosofia">Filosofía</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#proceso">Proceso</a>
+      <a href="#fundador">Fundador</a>
+      <a class="btn" href="#contacto">Agendar</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero" aria-label="Presentación">
+    <canvas id="sea" aria-hidden="true"></canvas>
+    <div class="veil" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <div class="wrap">
+        <span class="eyebrow fade-in">Boutique independiente · Lima, Perú</span>
+        <h1 aria-label="El patrimonio se construye en años. Se protege cada día.">
+          <span class="h-line"><span>El patrimonio se</span></span>
+          <span class="h-line"><span>construye en años.</span></span>
+          <span class="h-line"><span>Se protege <em>cada día.</em></span></span>
+        </h1>
+        <p class="lede fade-in d1">Orca Wealth Management le da una visión integral de su horizonte patrimonial: inversiones a través de bancos y plataformas globales de primer nivel, planificación sucesoria con la familia como piedra angular, y una sola lealtad: la de usted.</p>
+        <div class="cta-row fade-in d2">
+          <a class="btn solid" href="#contacto">Agendar conversación privada</a>
+          <span class="note">Confidencial · Sin compromiso</span>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-cue fade-in d3">Descubra</div>
+  </section>
+
+  <div class="stats" role="list" aria-label="Credenciales">
+    <div class="wrap">
+      <div class="cell reveal" role="listitem"><div class="k" data-count="10" data-suffix="+">10+</div><div class="v">Familias high net worth</div></div>
+      <div class="cell reveal" role="listitem"><div class="k" data-count="100" data-suffix="%">100%</div><div class="v">Independiente</div></div>
+      <div class="cell reveal" role="listitem"><div class="k">Abierta</div><div class="v">Arquitectura global</div></div>
+      <div class="cell reveal" role="listitem"><div class="k">1 : 1</div><div class="v">Atención del fundador</div></div>
+    </div>
+  </div>
+
+  <section class="filosofia" id="filosofia">
+    <div class="wrap">
+      <span class="eyebrow">Filosofía</span>
+      <div class="grid" style="margin-top:34px">
+        <blockquote class="reveal">La tranquilidad no es un producto financiero. Es el resultado de una estrategia bien construida y <em>honestamente ejecutada.</em></blockquote>
+        <div class="pts">
+          <div class="pt reveal">
+            <h3><span class="idx">I</span>Independencia real</h3>
+            <p>No pertenecemos a ningún banco. Recomendamos cada instrumento porque conviene a su estrategia, no porque haya una cuota que cumplir.</p>
+          </div>
+          <div class="pt reveal">
+            <h3><span class="idx">II</span>La familia en el centro</h3>
+            <p>El patrimonio tiene apellido. Planificamos la sucesión y la gobernanza familiar para que lo construido pase a la siguiente generación en orden.</p>
+          </div>
+          <div class="pt reveal">
+            <h3><span class="idx">III</span>Visión consolidada</h3>
+            <p>Activos financieros e inmobiliarios, en Perú y en el exterior, en un solo reporte claro. Decisiones con el mapa completo a la vista.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="servicios" id="servicios">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow">Servicios</span>
+          <h2>Una sola relación. Todo su patrimonio.</h2>
+        </div>
+        <p class="desc">Seis disciplinas integradas bajo un mismo criterio, para que cada decisión (invertir, proteger, heredar) se tome mirando el conjunto.</p>
+      </div>
+      <div class="srv-grid">
+        <div class="srv reveal">
+          <span class="num">I</span>
+          <h3>Gestión de portafolios</h3>
+          <p>Carteras globales diversificadas a través de bancos y plataformas internacionales de primer nivel.</p>
+        </div>
+        <div class="srv reveal">
+          <span class="num">II</span>
+          <h3>Planificación patrimonial y sucesoria</h3>
+          <p>Estructuras que ordenan el traspaso del patrimonio con la familia como piedra angular, evitando conflictos y pérdidas de valor.</p>
+        </div>
+        <div class="srv reveal">
+          <span class="num">III</span>
+          <h3>Optimización fiscal</h3>
+          <p>Planificación tributaria legítima y eficiente sobre inversiones locales e internacionales, coordinada con sus asesores legales.</p>
+        </div>
+        <div class="srv reveal">
+          <span class="num">IV</span>
+          <h3>Seguros y protección</h3>
+          <p>Cobertura de vida y protección patrimonial dimensionada a su realidad, como cimiento de toda la estrategia.</p>
+        </div>
+        <div class="srv reveal">
+          <span class="num">V</span>
+          <h3>Reporte consolidado</h3>
+          <p>Un solo estado de situación con todos sus activos financieros y reales, actualizado y comprensible.</p>
+        </div>
+        <div class="srv reveal">
+          <span class="num">VI</span>
+          <h3>Educación y gobernanza familiar</h3>
+          <p>Preparamos a la siguiente generación para administrar el patrimonio familiar, no solo recibirlo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="proceso" id="proceso">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow">Proceso</span>
+          <h2>Método antes que producto</h2>
+        </div>
+        <p class="desc">Cuatro etapas, siempre en el mismo orden. Nadie le hablará de un instrumento antes de entender su situación completa.</p>
+      </div>
+      <div class="steps">
+        <div class="step reveal">
+          <div class="n">1</div>
+          <h3>Diagnóstico</h3>
+          <p>Conversación confidencial: activos, objetivos, familia, horizonte y tolerancia al riesgo.</p>
+        </div>
+        <div class="step reveal">
+          <div class="n">2</div>
+          <h3>Estrategia</h3>
+          <p>Diseño de la arquitectura patrimonial: asignación de activos, estructuras y protección.</p>
+        </div>
+        <div class="step reveal">
+          <div class="n">3</div>
+          <h3>Implementación</h3>
+          <p>Ejecución a través de las plataformas y bancos que mejor sirvan a la estrategia, no al asesor.</p>
+        </div>
+        <div class="step reveal">
+          <div class="n">4</div>
+          <h3>Acompañamiento</h3>
+          <p>Revisión periódica, reporte consolidado y ajustes cuando la vida (o el mercado) cambian.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="fundador" id="fundador">
+    <div class="wrap">
+      <div class="grid">
+        <div class="portrait-frame reveal">
+          <div class="portrait">
+            <div class="ph"><span class="mono">FH</span></div>
+            <div class="sig">Orca · Lima</div>
+          </div>
+        </div>
+        <div>
+          <span class="eyebrow">El fundador</span>
+          <h2>Fabián Hidalgo Torres</h2>
+          <div class="role">Private Wealth Manager · Fundador</div>
+          <p class="reveal">Fabián fundó Orca Wealth Management con una convicción: en el Perú, las familias con patrimonio merecen la misma calidad de asesoría que reciben los grandes capitales en las plazas internacionales, con independencia, transparencia y trato directo.</p>
+          <p class="reveal">Cada cliente de la firma es atendido personalmente por él, de principio a fin. Sin equipos rotativos, sin llamadas de un banco con metas de venta: una relación de confianza construida para durar generaciones.</p>
+          <a class="li reveal" href="https://www.linkedin.com/in/fabianhidalgotorres/" target="_blank" rel="noopener">Ver perfil en LinkedIn ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cierre" id="contacto">
+    <div class="wrap">
+      <span class="eyebrow">Conversemos</span>
+      <h2>La primera conversación es privada, sin costo y <em>sin compromiso.</em></h2>
+      <p>Treinta minutos para entender su situación y decirle, con honestidad, si podemos aportar valor a su patrimonio.</p>
+      <div class="cta-row">
+        <a class="wa" href="https://www.linkedin.com/in/fabianhidalgotorres/" target="_blank" rel="noopener">Escribir a Fabián por LinkedIn&nbsp;↗</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="row">
+      <span class="fb"><img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wgARCADIAMgDASIAAhEBAxEB/8QAHQABAQACAgMBAAAAAAAAAAAAAAEHCAIGAwQFCf/EABYBAQEBAAAAAAAAAAAAAAAAAAABAv/aAAwDAQACEAMQAAAB7a0yWbmtMhua0yG5rTOG5t0x5m5V0yJuY0zi7mtM+Juc0yG5rTIbnTTOG5rTIu5rTIWiCknIcV+0vfugZx12TN+Ec2+Ewsz584wne9/dMTXKvhMYTlEjkOLkXi5AESxQL7PrDZLW3tPqmVeo9a8RkHv+EvmHy+0d9x2dh7z071TG4IsHKEBQSFUsSfV+WazF6OKqmV/l49iZZ9fFpcpeHoXomT/Vx0JQSwsUAFSAQWxSVChJUWxSVSBBCpVgWhkCUURLLFUI5QhSURKJUVUKgqxBFsoLxSpVNnvUTW2eTgS+XmevEKhbFEoKJYQAQqVQPt7faq7vLiXKPdEePncPnedae+ZTPz0uTMZ2AhC0WES0AISq+h87ZUz72fljyXvnRsVembP4aydr2Zgw3hfpp9L5xYKnFyixQCASzksQN9NC/wBEl8Gqv1sFR72zWq0szRnLSaHk8ahYkWLUoCJSliAqXzp4P0G6pl6XQbH/AOkWkNY7gKEoiUqUicoRRYgsKWF7J1uGXetdIhlP18awssCwsBZUIWhCDfWk0gAUCBYIosAAAAAB/8QAKhAAAQQCAgEDAwQDAAAAAAAABQADBAYCFwEHQBEVMBASFhMUMTU2UHD/2gAIAQEAAQUC3OEW5wi3OEW5wi3OEW5wi3OFW5wi3OEW5wi3OEW5wi3OEW5wi3OEW5wi3OEW5wi3OEW5wi3OEW5wi3OEW5wi3OE+L7efIwrzNfr3BeVw5DBxbuFyx5x58QJFxnGe43OeJa6jf5bsk4aPd7IPMAavbhFdH26xNTIhM5KrYzm6uSIYSx3+ss1ov80WRlEk9j8YWIAurm8ILwghkWvnaf8Al3Vn2TK/JjuQ361XHbEWNtQQRvuL+1+cLY5gNPSR7jk45ImxQ5L2ghZLFlZZYY1LAzpvZOE/GDZJsE2auuBZ213PO0fOLzabIfsRGfGIMZwpWArBDoUBzGVAFz1gGFPTWa+P5wdGiWc/ZhP6EiKMxi+LlOkZxv8AiPXToI2OtvVfLOGeGTWawZcdTkV5r6c+EDnODTB2/Yx5bfXU2xSx1NDC+McMcOOePVEayLLY3brX2aP4NYrcuyka/WoVbi/W3VUydlg4h2oy+LGLlN3sKMDkPnHQHik6uAI9cFp13BhvG8h3iScm5Wm0TrkCDNm+4eeeJ5CQUl/P08E4zdVruMettvg3SGFSxFkewDBJsOLqvXLBwbb40OFYvB68hcQqha7C3WQ/v/4+5OnyCUjrbCDWwl4u2dsk2W6RKqHzzydz8Gqen4z2wazk2H19efF/lUpl+PVb3EkRbV4rDDkp+ndeRK+3lnjhyWDQzcW61FyqEfErhbEEYkdp2B50ndDBZ/Ls2xZcHbzKsgX/AE2sa0tY1paxrS1jWlrGtLWNaWsa0tY1paxrS1jWlrGtLWNaWsa0tY1paxrS1jWlrGtLWNaWsa0tY1paxrS1jWlrGtLWNaWsa0v/xAAXEQEAAwAAAAAAAAAAAAAAAAARIDBw/9oACAEDAQE/AYuLF3//xAAUEQEAAAAAAAAAAAAAAAAAAABw/9oACAECAQE/ASn/xABHEAABAgIFBwgFCQYHAAAAAAABAgMABAUREiHSEyIxNDWToxQyQEFRYXGBEEKRobEGFSMwM1JywdEgQ3OCkvBQYmNworLx/9oACAEBAAY/AtVn92jHGqz+7RjjVZ/doxxqs/u0Y41Wf3aMcarP7tGONVn92jHGqz+7RjjVZ/doxxqs/u0Y41Wf3aMcarP7tGONVn92jHGqz+7RjjVZ/doxxqs/u0Y41Wf3aMcarP7tGONVn92jHGqz+7RjjVZ/doxxqs/u0Y41Wf3aMcarP7tGONVn92jH9Vo6QilqRRlJiYulpY6PFUWgsD/KEir2Q9MSbaZalpb7RpHNcggiojSOiyMuvmOvoQfAmKMZFyEtqNXmP09DzfquS5r8iImZObbcUw8+AA0qrOVUb/bDbb0hlpWwK2heEXae81xPTMuhUnQjFS1J0HRo7uuGWQzL0fRy3Ai9sEpR3qN8Io1ieSJBd+Utg2bq7NcLo9UtJ0lIJcCCvJ51R7FdohCJYnk7yLaUk12e769p9HPaWFjxEUbTcnntIzXKvVr7fA3efopGmJk5OUlmbFs9p/8APfErOKFRenAurszod/hI+EUxIpID6ifYpNQhxl5BbdQbKkq6oZk7WQStJcKyPVj5vkWMotlYSuYmM4k9w0CJD+Cfj0BxLJS5LuipyXdFptflBWJFxuv1ETGb701++G5QWZeSbvTLtc2vtPafGGpsMpfW0bSAsmquOVOyzbL9QSVNk3jzhM1JuWHBcQdCh2GAt6gpF2bAuedFr3VfnApRLlqZrvtaCOzwjLt0TLS04arUzzlnw7IbykiwypFwcFZV9fLmYAUxaqXWK803GEsqWyFJqlCUEZykgqK6+81JriaXlKko5lp5NxABqI8z/Yh5fJ2lIKFDMcANrlHV2Zvuik5Nx1pKi+ltiYcIzard/gagPMRMvt2GGksjJBDgBBDVd47z+cEJcssoccbIMwKyApICh/UfZAK3vogU2nw8nrXVVZ6vGF2rZuOZlkizU2Vd/WKvOFrS+o1kVVOJzLkmo9ukxO5FALgaVYtPVkFLoFY/l6MmXU+4ZdOhoqNkeX+yXzZM0fL8ubBJUtAJdHaDCpqhrSwL1SpNZ/lP5QULSULFxSrSPRmIUv8ACIz2lo8U9Ek5lqu226k3dfdHzdREuaUpLRUjmI8Y5d8oZsB0/uJZIFXdXAyFHs2h67gtq9pipICR3egiakWXCfWs1K9ohc9RylOyqb3GlXqQO3vHQksy2YlN7j3U2IyMq3nHnuq5y/H9i3KUvyaWq+wNaQPZphC5l96mqMWkhXJjlC0rwN/sgocdKAoVKRMNKR8RDXzZMZVt0FRa05Pz6AzKS6bTzqrKRDcowNF619a1dvoK3FpbQNKlGoCGZCXmOVzDqrIDArHt0eiakS6W6Ho4fThKqss590ns0+yLC55nNuDbGfV5CFIouVs/60xhhczNOqeeXpUroE1Srg5n0LXj6x+HoS0lPKqQd+ylkaT4wKR+WVKcmZN6JFCrIH9918ZWiGMnIysqbObVWdFf/KJmcdOYygq8ewQik6UdmMrNKLuSQqoVE6Ym5aQRYlmTkwK67wL/AH19Co8VXuJyp8zDs2rOc5rSPvKh2cXVO/KKZvW45emVHZ+L4Qp+aeW+6rSpZh6kp+bZYcmtAUsVhA7obkZFKkyQXcDpdVCJZl1D9IhsNobQa7Jq0mFLWbSlGsk9fQqKq0clb/6iG5RCsyTSP6zf+kVm89Ho1uZSUOpa5p0gdXuikDMIKco6VoJ9ZPV0ZtlpJW64oJSkdZhuYmkpmaQ02jelv8P6wkEgWjUO+DLzjCXm+/SPA9UBAJclHb2nD8D39FYnlM8oyNZSiuq+q6LaJhthP3ENCr3ww6/OKtMG03kxZsntugDlwTV1hpF/uhEnPNIU826HEvou6iKiPP8AwfZvHcxRs3juYo2bx3MUbN47mKNm8dzFGzeO5ijZvHcxRs3juYo2bx3MUbN47mKNm8dzFGzeO5ijZvHcxRs3juYo2bx3MUbN47mKNm8dzFGzeO5ijZvHcxRs3juYo2bx3MUbN47mKNm8dzFGzeO5ijZvHcxR/8QAKRABAAEDAwQCAQUBAQAAAAAAAREAITEQQWEgMFFxgZGhQLHB0fBQ4f/aAAgBAQABPyH/AIEiRIkSJGqRIkSJEiRIkSJEiRIkSJEiNBiZR6qOlOiNY6YqdE1mN4sdxP1Xj15rKsz9BsivARwW7IbTD8lI2dCZHojQqOhKCo6s6fgjBI1YEDGJQpFBFwLlY/v90aXYcQ2GJ2JUKXniBWC3vJiDy2IXmQPBm5FwVnLRAETmI3mm+GI5CtmZIPZQQ6IMKYFbkZcVk7P45Rluf3RTU6msab6xVj33KSftVlqIXJj+BoGnYWNYYPLGHCvSuOmw+CDQLJyo5ub4R+6WtMKFFZy5Hg7hve1SbbH/AOTGfC9i1oqdc1GuA83zz/IoWepxHqSFCURh09lfmTRlpyonCxmiNu5YsSJqJYshvA3KiSkhZ8pUDNOYr4i08LQYtFHGIibD0BbTd5oWAkoM8TiPjqnQqOp6NJxC4ewZOSpj8k+UysW7waAvZMwqxMigXWzYlQljWcCPlIjgy8VZWLsJbuSbUPNipARt3bSzK4VtlgqqtuJGM5si6CGuhRKHiErXnGMmZSUcBa6QuvhmlltCKJkkjIp44aF7bC2AKVkxwx+gM9Txclk18Ybv31xUUdEazo0d6exHSdE9JTUdcdT2Z6x1nvNR2Gmjtx2o6MdDqFekhg5Mk4+uDVwRg5M+1+dqeRMJCeE0ch7la/JNn6FtQaPaCBsTD8iT5qboKplN5GY4sbpRA47KeUf790Vf4BFrjBAihEJJzXig5/gn81+LaTI/+hz3ZqOifto2eR78FBRxb5vK/jHQcXDJnN2d7mjQ/STJCXhn5cUrhjRRyIVZe3bctG4b827Z0wCK9zd4M0K5RZ8hf6xoO45CBytXDaxPl2jNl0LyggLfSxI3yzQgOMlKG12K8CcZD0P5fim1t/WPBwVGsdZ0zsd95E/RD5dFV2l0jYYYPy7UYz63TBvxLlQIEwS3pTdWWb2ocxAHd/IwfNDoMwOhFab5zvUem5GZC91Jo6HtECDV8rJ+IoazNd/B63eCvEfVIbDeG2MPJW/1JH0eDioOMN+THlKqx6ockAkT4FNjwfLwKXYAKHGHjenAqZ5OXWOg0O0YjjxyDhT9fvpTIpdXf9MEoCaECwTiQ3fSo/FesuQ72t8dB1xoVv2MwFDkYCnIsEcjwPP29UgMgVyiYPgaX1sRu+ci9VNtU69s8S3uexHYnpGPcmBbFPCjSGRLMj6L+aJci4HhbvdF7lC9qHO6aaSMDZiManQaTU6Y1z0PaezP6rJLrrL7LbLpLrrrr7rrrr7rr7r/2gAMAwEAAgADAAAAEMccdYYdNPcVMMJzkhg/jJqn9xs59rysuzVzwt4ws+p4nM3QQq1mgiy33ru524r9wvsq4l1hou414tj9hg96uUrlrn0wqp72gtGLFi/vgbgl3u8JPJksssvuqi/EjJek92v2gwu+1X428nl/h7t9rtBs/wD8PPOBzwBx2Dzzzzz7/8QAHhEAAwADAAMBAQAAAAAAAAAAAAERECExIEFhMFH/2gAIAQMBAT8QNlKNjFoncUTfg/p9xTo0P4TRvhwbmNpxG/eFYdx9NHomHsXBresJ4bQiGj6J00PSxXRERUmLeybwtDYiJ7IsLpw+saF/RsTuO9NLh0e8U9FOkgk6cJSEHrCrJs4I15+9EGRIU4Po1BLxdHoTJR9w3PBOlEKs6NaNl2LY4hcINEmOsSh6LrCRD2ITeFiQfSfgn4f/xAAcEQADAAIDAQAAAAAAAAAAAAAAAREQMCAhUED/2gAIAQIBAT8QhCEIQhCEIQnO/QuvVebtmliWJqYvBp//xAAkEAEAAwACAwACAwADAAAAAAABABEhMUEQUWFxgSCRoTCx8f/aAAgBAQABPxDxCBWf8QgQIEwhQgRIEhBCQVHgUITwIlVBXfyECJQoUKvNXKuGQM8AtlMP7CjRpKZUolbKJpAuURMhAZsC46geA25QxpP8Q54mkqp7YNFNKAhI1AfsDuDZcqKP+B8qGTIMEU8S6gmCDiMfcIlBNIjwjCfaiLCxxEpgs4jaJUTPkPU02IzFw8H2WPhKRsyUqJu9hn9LKisf4wJ+ARxHoV9uf0AKftLLmbuhslvWINpeIXh/VxVdmLcOJCc0Ok7TcBvS0UUpQSWtmDS1PSyC3gS2xzxoG1kCN1U2jYiKwkF9qjVkr46ItsSEu7QQRdqitWxygSVexgjOSaYFT44iVLviOI74g3gD/sJ+GdPM04Vr6Om46TDkVCH9KBTVPsi0DZN1m/f+BHYPRf6jR+nQT7Cfh/yi9XkKqRJc8kQsLfLOGh3wQynJC3VQFWrWJYnY4T/3zuVXMrxdw48L+F+5ZL4TFRaIMt1xahKRkprLBrLrJa2xBf6A3wp+xF/hDXKpbbbGtUZNVNREBMaNNWFm3xLHCASUwhBqxMOGWlKAu0e3KPogiIMFtQo0MTEOhVQvHaHUVUGIooYURykisHk0ALQTgIMtj2x62lpc7zTpLfC34puJUxkaryJsyBRFvwPUbWAI9gnQPUpQI+4yMK1pQuNQpA3nYiJCAlEcOEzUngmUcmWFgKpMm8/MUOTPU0uc78oKTQCKJcP/AG/UwklWolFYQKvAajQ8ACN9KCNPaYEjcVGrAuhArSSg5usVqOX1LJACgWzNBYlq2cRyEXMl9sKplKzicS4owanMCo7OJqKGVHmcQAeJpZ10CtWjaYdvbFuBXE5eI1PzKnCfHglQNjr4PMv+40g77mpgi3C2PhlWeE2AxwlQZcZ/ES4MWpeXFyJFMBG4hH5KpiI8wncwxPBHiLIJ8MrYcMTLuZGoVGzK2L6g+4yqbmpVcQtI6QzJVxKgIbBmoj1BXlnEuD4sY6zCFosNl1C4346n4fCVFqXc2/kFuQoQKiVL67gZ4WoAEEFE4IRLPsGVZ9gVBlbDJxOZ+Y2RlQKl1zFlsvw4UQ+xt4Wot8kumSmoFeNQPvh3mEKtWFTAhwBxcXlmTdosuvsV0moV+NCS0o0T0+PlyEf8IBZ3sv8A0lthxOkWj75uJAj3Bvxyxu4sWyLcS4ojjOROALH6hkOxR2ZSh/5L2EaWioEKAMecHTOMHK+YFDRO9A/iiCzzA4P0RKJOQWML8jYDvsof1D3NqvwuFHdlGqLQ1ldy7gSos4gS51OI+5RirjYVAv8AEdhxBF6mJOWmDanQKHgCoA/o8XwKHRytTIStmWUZ7O7c5dGQWk/uXYoAH6WWLMepGCrfCKPUINHGaA/TQbF7WyHpgRag34IM4Y1Uu/CiXcq5dRVPVwK1OgtPQLA0oaBYfv8AAdAdSrn2rq+hAB+YrcZaurkQCnAOSvkvDC8k0BFULaS0Ci84nBCgiK1QNBFbJGjfo1L9K/YPOxWKhgBQBgABweC7OSCJpxzA9+QjzMRcl3ByW1BcnQOCE+jB9HEJRFt1UYZbcALMGKNJyqi5LytMQ9l7JW0elOhTagvYHqOsapVZQfXD6JdsEBoK0lbgwyw9eOQK6rlz14v1EVF5efALJUCo8eKuNdQyLB3FYUtJ/c/ol6+jVU37Upo7K2oXkUkjOce0DgQ6onLrTq/oDoUHRGwRaBgQK6SC0ZuPmJw96OV323kog16ZUOXGFj1UVVopz4rStHtVWdz/AL8u45NRPBnJHCD3OYjeSnx0FwVK80lcC9KpUen6jwRULU8qyogOT6Ykr3sDqd+LWZ+IpLgyxIRdl0RbIUFQxlUZOIwoTgBaxJverAIdHlHThlxvhbm+KBRVwo6hrHWNsESoDcS4tGzbjSQzKgYYiBkCdeAuBsWoYJAbPC+qhByBa5O5lOL6rKNSgAyQ2vobFHQ+oCMVyOKrfsI/qAh7aojKVrZKAErQVINxi3DiLOchSJC4wlf3OItFy8QSBGxjpFQAvYXqNHCLzNiOzYfvVt/uA67BcyoF0su2KcKLmEg/liz/AMqVVtbyaOTZdHY7giRJjmLsMIzlseJaFuoscXBsmxtVEMl+Fc68HGcy7XxdmwBJx4EOIS6YokW8IWRC4tkKfzf/AF138wf4+2+verHB4jq+HXV/ga666v8AF8118w4//9k=" alt=""><span class="fm">Orca <span style="font-family:var(--sans);font-size:10px;letter-spacing:.28em;color:var(--mist)">WEALTH MANAGEMENT</span></span></span>
+      <span>Lima, Perú · © 2026</span>
+    </div>
+    <p class="disclaimer">Orca Wealth Management brinda servicios de asesoría patrimonial y financiera. La información de este sitio es de carácter general y no constituye una recomendación de inversión. Rentabilidades pasadas no garantizan resultados futuros.</p>
+  </div>
+</footer>
+
+<script>
+  // Nav: fondo al hacer scroll
+  const hdr = document.getElementById('hdr');
+  const onScroll = () => hdr.classList.toggle('scrolled', window.scrollY > 40);
+  onScroll(); addEventListener('scroll', onScroll, {passive:true});
+
+  // Reveals
+  const io = new IntersectionObserver((es)=>{
+    es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.15});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Contadores
+  if(!reduced){
+    const cio = new IntersectionObserver((es)=>{
+      es.forEach(e=>{
+        if(!e.isIntersecting) return;
+        const el=e.target, end=+el.dataset.count, pre=el.dataset.prefix||'', suf=el.dataset.suffix||'';
+        const t0=performance.now(), dur=1400;
+        const tick=(t)=>{
+          const p=Math.min((t-t0)/dur,1), v=Math.round(end*(1-Math.pow(1-p,3)));
+          el.textContent=pre+v+suf;
+          if(p<1) requestAnimationFrame(tick);
+        };
+        requestAnimationFrame(tick); cio.unobserve(el);
+      });
+    },{threshold:.6});
+    document.querySelectorAll('[data-count]').forEach(el=>cio.observe(el));
+  }
+
+  // Océano: ondas lentas en canvas
+  const cv=document.getElementById('sea');
+  if(cv && !reduced){
+    const cx=cv.getContext('2d');
+    let W,H,raf;
+    const fit=()=>{const r=devicePixelRatio||1;W=cv.clientWidth;H=cv.clientHeight;cv.width=W*r;cv.height=H*r;cx.setTransform(r,0,0,r,0,0);};
+    fit(); addEventListener('resize', fit);
+    const waves=[
+      {a:26,l:.0042,s:.00014,y:.62,c:'rgba(194,162,101,0.10)'},
+      {a:34,l:.0031,s:.00010,y:.70,c:'rgba(96,138,190,0.09)'},
+      {a:44,l:.0024,s:.00007,y:.78,c:'rgba(242,238,229,0.05)'},
+      {a:58,l:.0018,s:.00005,y:.86,c:'rgba(96,138,190,0.07)'}
+    ];
+    const draw=(t)=>{
+      cx.clearRect(0,0,W,H);
+      for(const w of waves){
+        cx.beginPath();
+        for(let x=0;x<=W;x+=4){
+          const y=H*w.y + Math.sin(x*w.l + t*w.s)*w.a + Math.sin(x*w.l*1.7 + t*w.s*1.4)*w.a*.4;
+          x===0?cx.moveTo(x,y):cx.lineTo(x,y);
+        }
+        cx.lineTo(W,H);cx.lineTo(0,H);cx.closePath();
+        cx.fillStyle=w.c;cx.fill();
+      }
+      raf=requestAnimationFrame(draw);
+    };
+    raf=requestAnimationFrame(draw);
+    document.addEventListener('visibilitychange',()=>{
+      if(document.hidden) cancelAnimationFrame(raf); else raf=requestAnimationFrame(draw);
+    });
+  }
+</script>
+</body>
+</html>
