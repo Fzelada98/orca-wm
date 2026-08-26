@@ -238,6 +238,18 @@
   @media (max-width:860px){.steps{grid-template-columns:1fr 1fr}.steps::before{display:none}}
   @media (max-width:540px){.steps{grid-template-columns:1fr}}
 
+  /* ---------- Track record ---------- */
+  .resultados{background:var(--deep);border-top:1px solid var(--hairline-d);border-bottom:1px solid var(--hairline-d)}
+  .resultados .desc{color:var(--ivory-dim)}
+  .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(18px,2.5vw,32px)}
+  .kpi{border-top:2px solid var(--gold);padding-top:22px}
+  .kpi .kv{font-family:var(--serif);font-size:clamp(38px,4vw,56px);color:var(--gold-soft);line-height:1;font-variant-numeric:tabular-nums}
+  .kpi .kl{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--mist);margin-top:14px;line-height:1.6}
+  .years{display:flex;gap:clamp(24px,4vw,64px);margin-top:clamp(40px,6vh,60px);padding-top:34px;border-top:1px solid var(--hairline-d);flex-wrap:wrap}
+  .yr .yy{font-size:12px;letter-spacing:.22em;color:var(--mist);text-transform:uppercase}
+  .yr .yv{font-family:var(--serif);font-size:clamp(26px,2.6vw,34px);color:var(--ivory);margin-top:8px;font-variant-numeric:tabular-nums}
+  .resultados .fine{margin-top:38px;font-size:12px;color:var(--mist);max-width:88ch;line-height:1.6}
+  @media (max-width:860px){.kpi-grid{grid-template-columns:1fr 1fr}}
   /* ---------- Fundador ---------- */
   .fundador{background:var(--abyss)}
   .fundador .grid{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,7fr);gap:clamp(40px,6vw,100px);align-items:center}
@@ -331,6 +343,7 @@
     </a>
     <nav class="links" aria-label="Principal">
       <a href="#filosofia">Filosofía</a>
+      <a href="#resultados">Resultados</a>
       <a href="#servicios">Servicios</a>
       <a href="#proceso">Proceso</a>
       <a href="#fundador">Fundador</a>
@@ -391,6 +404,30 @@
           </div>
         </div>
       </div>
+    </div>
+  </section>
+
+  <section class="resultados" id="resultados">
+    <div class="wrap">
+      <div class="sec-head">
+        <div>
+          <span class="eyebrow">Track record</span>
+          <h2>Resultados medidos día a día</h2>
+        </div>
+        <p class="desc">Un portafolio representativo gestionado por la firma, valorizado a mercado cada día desde octubre de 2022. Sin promesas: una serie auditable.</p>
+      </div>
+      <div class="kpi-grid">
+        <div class="kpi reveal"><div class="kv">+61%</div><div class="kl">Rentabilidad acumulada<br>desde oct. 2022</div></div>
+        <div class="kpi reveal"><div class="kv">+15.9%</div><div class="kl">Anualizada en USD</div></div>
+        <div class="kpi reveal"><div class="kv">100%</div><div class="kl">Años en positivo</div></div>
+        <div class="kpi reveal"><div class="kv">−5.4%</div><div class="kl">Caída máxima<br>en tres años</div></div>
+      </div>
+      <div class="years reveal">
+        <div class="yr"><div class="yy">2023</div><div class="yv">+10.9%</div></div>
+        <div class="yr"><div class="yy">2024</div><div class="yv">+17.3%</div></div>
+        <div class="yr"><div class="yy">2025</div><div class="yv">+18.0%</div></div>
+      </div>
+      <p class="fine">Rentabilidad de un portafolio representativo administrado por la firma, en dólares, calculada sobre el valor cuota diario a precios de mercado (oct. 2022 – ene. 2026), diversificado en renta fija corporativa, acciones y fondos. Las rentabilidades pasadas no garantizan resultados futuros.</p>
     </div>
   </section>
 
