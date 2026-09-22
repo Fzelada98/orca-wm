@@ -1,0 +1,16 @@
+# Orca Wealth Management
+
+> Boutique independiente de gestión patrimonial con sede en Lima, Perú, dirigida por Fabián Hidalgo Torres. Ofrece una visión integral del patrimonio de familias e inversionistas privados: gestión de portafolios, planificación patrimonial y sucesoria, optimización fiscal, seguros y protección, reporte consolidado y educación y gobernanza familiar. Atiende clientes en todo el Perú y en el extranjero.
+
+## Cómo trabaja
+
+Método antes que producto, en cuatro pasos: diagnóstico, estrategia, implementación y acompañamiento continuo. La primera conversación es privada y sin costo.
+
+## Páginas
+
+- [Inicio](https://fzelada98.github.io/orca-wm/): servicios, método y contacto
+- [Fabián Hidalgo Torres en LinkedIn](https://www.linkedin.com/in/fabianhidalgotorres/)
+
+## Contacto
+
+- WhatsApp: +51 988 194 591
